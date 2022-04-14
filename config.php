@@ -29,6 +29,13 @@ require_once(__DIR__ . '/lib.php');
 $THEME->name = 'boost_var_01';
 $THEME->sheets = [];
 $THEME->editor_sheets = [];
+
+//add addtional css sheets here
+$THEME->sheets = array('legacy');
+
+// additional javascript - note: this does not work in Boost
+$THEME->javascripts_footer = array('customjssettings');
+
 $THEME->editor_scss = ['editor'];
 $THEME->usefallback = true;
 $THEME->scss = function($theme) {
@@ -45,51 +52,51 @@ $THEME->layouts = [
     'standard' => array(
         'file' => 'columns2.php',
         'regions' => array('upper-navdrawer' , 'lower-navdrawer', 'top-fullwidth', 'upper-fullwidth', 'lower-fullwidth', 'bottom-fullwidth', 'side-pre'),
-        'defaultregion' => 'lower-navdrawer',
+        'defaultregion' => 'side-pre',
     ),
     // Main course page.
     'course' => array(
         'file' => 'columns2.php',
         'regions' => array('side-pre'),
         'regions' => array('upper-navdrawer' , 'lower-navdrawer', 'top-fullwidth', 'upper-fullwidth', 'lower-fullwidth', 'bottom-fullwidth', 'side-pre'),
-        'defaultregion' => 'lower-navdrawer',
+        'defaultregion' => 'side-pre',
     ),
     'coursecategory' => array(
         'file' => 'columns2.php',
         'regions' => array('upper-navdrawer' , 'lower-navdrawer', 'top-fullwidth', 'upper-fullwidth', 'lower-fullwidth', 'bottom-fullwidth', 'side-pre'),
-        'defaultregion' => 'lower-navdrawer',
+        'defaultregion' => 'side-pre',
     ),
     // Part of course, typical for modules - default page layout if $cm specified in require_login().
     'incourse' => array(
         'file' => 'columns2.php',
         'regions' => array('upper-navdrawer' , 'lower-navdrawer', 'top-fullwidth', 'upper-fullwidth', 'lower-fullwidth', 'bottom-fullwidth', 'side-pre'),
-        'defaultregion' => 'lower-navdrawer',
+        'defaultregion' => 'side-pre',
     ),
     // The site home page.
     'frontpage' => array(
         'file' => 'columns2.php',
         'regions' => array('upper-navdrawer' , 'lower-navdrawer', 'top-fullwidth', 'upper-fullwidth', 'lower-fullwidth', 'bottom-fullwidth', 'side-pre'),
-        'defaultregion' => 'lower-navdrawer',
+        'defaultregion' => 'side-pre',
         'options' => array('nonavbar' => true),
     ),
     // Server administration scripts.
     'admin' => array(
         'file' => 'columns2.php',
         'regions' => array('upper-navdrawer' , 'lower-navdrawer', 'top-fullwidth', 'upper-fullwidth', 'lower-fullwidth', 'bottom-fullwidth', 'side-pre'),
-        'defaultregion' => 'lower-navdrawer',
+        'defaultregion' => 'side-pre',
     ),
     // My dashboard page.
     'mydashboard' => array(
         'file' => 'columns2.php',
         'regions' => array('upper-navdrawer' , 'lower-navdrawer', 'top-fullwidth', 'upper-fullwidth', 'lower-fullwidth', 'bottom-fullwidth', 'side-pre'),
-        'defaultregion' => 'lower-navdrawer',
+        'defaultregion' => 'side-pre',
         'options' => array('nonavbar' => true, 'langmenu' => true, 'nocontextheader' => true),
     ),
     // My public page.
     'mypublic' => array(
         'file' => 'columns2.php',
         'regions' => array('upper-navdrawer' , 'lower-navdrawer', 'top-fullwidth', 'upper-fullwidth', 'lower-fullwidth', 'bottom-fullwidth', 'side-pre'),
-        'defaultregion' => 'lower-navdrawer',
+        'defaultregion' => 'side-pre',
     ),
     'login' => array(
         'file' => 'login.php',
@@ -136,19 +143,18 @@ $THEME->layouts = [
     'report' => array(
         'file' => 'columns2.php',
         'regions' => array('upper-navdrawer' , 'lower-navdrawer', 'top-fullwidth', 'upper-fullwidth', 'lower-fullwidth', 'bottom-fullwidth', 'side-pre'),
-        'defaultregion' => 'lower-navdrawer',
+        'defaultregion' => 'side-pre',
     ),
     // The pagelayout used for safebrowser and securewindow.
     'secure' => array(
         'file' => 'secure.php',
         'regions' => array('upper-navdrawer' , 'lower-navdrawer', 'top-fullwidth', 'upper-fullwidth', 'lower-fullwidth', 'bottom-fullwidth', 'side-pre'),
-        'defaultregion' => 'lower-navdrawer',
+        'defaultregion' => 'side-pre',
     )
 ];
 
 $THEME->parents = [];
 $THEME->enable_dock = false;
-$THEME->csstreepostprocessor = 'theme_boost_var_01_css_tree_post_processor';
 $THEME->extrascsscallback = 'theme_boost_var_01_get_extra_scss';
 $THEME->prescsscallback = 'theme_boost_var_01_get_pre_scss';
 $THEME->precompiledcsscallback = 'theme_boost_var_01_get_precompiled_css';

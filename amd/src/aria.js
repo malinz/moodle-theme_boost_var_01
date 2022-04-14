@@ -21,7 +21,6 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-import {end, arrowUp, arrowDown, arrowLeft, arrowRight, home, enter, space} from 'core/key_codes';
 import $ from 'jquery';
 import Pending from 'core/pending';
 
@@ -42,16 +41,16 @@ const dropdownFix = () => {
     // Special handling for "up" keyboard control.
     document.addEventListener('keydown', e => {
         if (e.target.matches('[data-toggle="dropdown"]')) {
-            const trigger = e.which;
+            const trigger = e.key;
 
             // Up key opens the menu at the end.
-            if (trigger == arrowUp) {
+            if (trigger == 'ArrowUp') {
                 // Focus the end of the menu, not the beginning.
                 setFocusEnd();
             }
 
             // Space key or Enter key opens the menu.
-            if (trigger == space || trigger == enter) {
+            if (trigger == ' ' || trigger == 'Enter') {
                 // Cancel random scroll.
                 e.preventDefault();
                 // Open the menu instead.
@@ -94,9 +93,7 @@ const dropdownFix = () => {
     // text starting with the typed character (case insensitive).
     document.addEventListener('keypress', e => {
         if (e.target.matches('.dropdown [role="menu"] [role="menuitem"]')) {
-            const trigger = String.fromCharCode(e.which).toLowerCase();
             const menu = e.target.closest('[role="menu"]');
-
             if (!menu) {
                 return;
             }
@@ -104,6 +101,8 @@ const dropdownFix = () => {
             if (!menuItems) {
                 return;
             }
+
+            const trigger = e.key.toLowerCase();
 
             for (let i = 0; i < menuItems.length; i++) {
                 const item = menuItems[i];
@@ -119,7 +118,7 @@ const dropdownFix = () => {
     // Keyboard navigation for arrow keys, home and end keys.
     document.addEventListener('keydown', e => {
         if (e.target.matches('.dropdown [role="menu"] [role="menuitem"]')) {
-            const trigger = e.which;
+            const trigger = e.key;
             let next = false;
             const menu = e.target.closest('[role="menu"]');
 
@@ -131,7 +130,7 @@ const dropdownFix = () => {
                 return;
             }
             // Down key.
-            if (trigger == arrowDown) {
+            if (trigger == 'ArrowDown') {
                 for (let i = 0; i < menuItems.length - 1; i++) {
                     if (menuItems[i] == e.target) {
                         next = menuItems[i + 1];
@@ -143,7 +142,7 @@ const dropdownFix = () => {
                     next = menuItems[0];
                 }
 
-            } else if (trigger == arrowUp) {
+            } else if (trigger == 'ArrowUp') {
                 // Up key.
                 for (let i = 1; i < menuItems.length; i++) {
                     if (menuItems[i] == e.target) {
@@ -156,11 +155,11 @@ const dropdownFix = () => {
                     next = menuItems[menuItems.length - 1];
                 }
 
-            } else if (trigger == home) {
+            } else if (trigger == 'Home') {
                 // Home key.
                 next = menuItems[0];
 
-            } else if (trigger == end) {
+            } else if (trigger == 'End') {
                 // End key.
                 next = menuItems[menuItems.length - 1];
             }
@@ -205,8 +204,8 @@ const updateTabFocus = e => {
     const tabList = e.target.closest('[role="tablist"]');
     const vertical = tabList.getAttribute('aria-orientation') == 'vertical';
     const rtl = window.right_to_left();
-    const arrowNext = vertical ? arrowDown : (rtl ? arrowLeft : arrowRight);
-    const arrowPrevious = vertical ? arrowUp : (rtl ? arrowRight : arrowLeft);
+    const arrowNext = vertical ? 'ArrowDown' : (rtl ? 'ArrowLeft' : 'ArrowRight');
+    const arrowPrevious = vertical ? 'ArrowUp' : (rtl ? 'ArrowRight' : 'ArrowLeft');
     const tabs = Array.prototype.filter.call(
         tabList.querySelectorAll('[role="tab"]'),
         tab => getComputedStyle(tab).display !== 'none'); // We only work with the visible tabs.
@@ -215,7 +214,7 @@ const updateTabFocus = e => {
         tabs[i].index = i;
     }
 
-    switch (e.keyCode) {
+    switch (e.key) {
         case arrowNext:
             e.preventDefault();
             if (e.target.index !== undefined && tabs[e.target.index + 1]) {
@@ -232,16 +231,16 @@ const updateTabFocus = e => {
                 tabs[tabs.length - 1].focus();
             }
             break;
-        case home:
+        case 'Home':
             e.preventDefault();
             tabs[0].focus();
             break;
-        case end:
+        case 'End':
             e.preventDefault();
             tabs[tabs.length - 1].focus();
             break;
-        case enter:
-        case space:
+        case 'Enter':
+        case ' ':
             e.preventDefault();
             $(e.target).tab('show');
             tabs.forEach(tab => {
@@ -256,7 +255,7 @@ const updateTabFocus = e => {
  */
 const tabElementFix = () => {
     document.addEventListener('keydown', e => {
-        if ([arrowUp, arrowDown, arrowLeft, arrowRight, home, end, enter, space].includes(e.keyCode)) {
+        if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Home', 'End', 'Enter', ' '].includes(e.key)) {
             if (e.target.matches('[role="tablist"] [role="tab"]')) {
                 updateTabFocus(e);
             }

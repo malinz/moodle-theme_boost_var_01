@@ -55,12 +55,8 @@
         ]
     }
 }}
-
-<div id="nav-container" class='container'>
-    
-    <!-- ADDITIONAL BLOCK START 1 -->
-    <nav class="list-group">
-        {{#hasuppernavdrawer}}
+<nav class="list-group" aria-label="{{firstcollectionlabel}}">
+     {{#hasuppernavdrawer}}
             <section data-region="blocks-column" class="d-print-none upper-navdrawer">
                 {{{ uppernavdrawerblocks }}}
             </section>
@@ -122,5 +118,3 @@
     {{/haslowernavdrawer}}
 </nav>
 <!-- ADDITIONAL BLOCK END 3-->
-
-</div>
