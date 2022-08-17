@@ -99,7 +99,11 @@ function theme_boost_var_01_get_main_scss_content($theme) {
     $context = context_system::instance();
     if ($filename == 'default.scss') {
         $scss .= file_get_contents($CFG->dirroot . '/theme/boost_var_01/scss/preset/default.scss');
-        } else if ($filename == 'unitec-00.scss') {
+        } else if ($filename == 'UnitecTePukengaDark.scss') {
+        $scss .= file_get_contents($CFG->dirroot . '/theme/boost_var_01/scss/preset/UnitecTePukengaDark.scss');
+    } else if ($filename == 'UnitecTePukengaLight.scss') {
+        $scss .= file_get_contents($CFG->dirroot . '/theme/boost_var_01/scss/preset/UnitecTePukengaLight.scss');
+    } else if ($filename == 'unitec-00.scss') {
         $scss .= file_get_contents($CFG->dirroot . '/theme/boost_var_01/scss/preset/unitec-00.scss');
     } else if ($filename == 'unitec-01.scss') {
         $scss .= file_get_contents($CFG->dirroot . '/theme/boost_var_01/scss/preset/unitec-01.scss');
@@ -126,7 +130,7 @@ function theme_boost_var_01_get_main_scss_content($theme) {
     } else if ($filename == 'hawkins.scss') {
         $scss .= file_get_contents($CFG->dirroot . '/theme/boost_var_01/scss/preset/hawkins.scss');
     } else if ($filename == 'swift.scss') {
-        $scss .= file_get_contents($CFG->dirroot . '/theme/boost_var_01/scss/preset/swift.scss');     
+        $scss .= file_get_contents($CFG->dirroot . '/theme/boost_var_01/scss/preset/swift.scss');
     } else if ($filename == 'plain.scss') {
         $scss .= file_get_contents($CFG->dirroot . '/theme/boost_var_01/scss/preset/plain.scss');
     } else if ($filename && ($presetfile = $fs->get_file($context->id, 'theme_boost_var_01', 'preset', 0, '/', $filename))) {
